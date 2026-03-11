@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bánki Donát Technikum - Tantárgyi Portál</title>
+    <!-- Tailwind CSS a modern elrendezéshez -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Modern sötét háttér animációval */
+        body {
+            background: linear-gradient(-45deg, #020617, #0f172a, #1e1b4b, #020617);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Neon stílusú aláhúzás a logó színeivel (kék és narancs) */
+        .thick-underline {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 800;
+        }
+        .thick-underline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #1e40af, #3b82f6, #f59e0b);
+            border-radius: 4px;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Glassmorphism gombok */
+        .subject-btn {
+            display: block;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+        }
+
+        .subject-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            transform: translateY(-8px);
+            color: white;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Panelek üveg stílusa */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .logo-container {
+            overflow: hidden;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            position: relative;
+        }
+        
+        .logo-container:hover {
+            border-color: rgba(245, 158, 11, 0.4);
+            transform: scale(1.02);
+        }
+
+        /* Galéria felugró ablak */
+        #galleryModal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #galleryModal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 1000px;
+            width: 100%;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10">
+
+    <div class="max-w-7xl mx-auto">
+        <!-- 4 Oszlopos Felépítés -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+            
+            <!-- 11. Osztály -->
+            <div class="flex flex-col items-center">
+                <h2 class="text-xl thick-underline">11. osztály</h2>
+                <a href="pdf/11/elektro.pdf" target="_blank" class="subject-btn">Elektronika</a>
+                <a href="pdf/11/halozatkez.pdf" target="_blank" class="subject-btn">Hálózatkezelés</a>
+                <a href="pdf/11/digitalis.pdf" target="_blank" class="subject-btn">Digitális áramkörök</a>
+                <a href="pdf/11/adatb.pdf" target="_blank" class="subject-btn">Adatbáziskezelés</a>
+            </div>
+
+            <!-- 12. Osztály -->
+            <div class="flex flex-col items-center">
+                <h2 class="text-xl thick-underline">12. osztály</h2>
+                <a href="pdf/12/mikrovez.pdf" target="_blank" class="subject-btn">Mikrovezérlő progamozás</a>
+                <a href="pdf/12/plc.pdf" target="_blank" class="subject-btn">PLC programozás</a>
+                <a href="pdf/12/szamszim.pdf" target="_blank" class="subject-btn">Számítógépes szimuláció</a>
+                <a href="pdf/12/programalap.pdf" target="_blank" class="subject-btn">Programozás alapjai</a>
+            </div>
+
+            <!-- 13. Osztály -->
+            <div class="flex flex-col items-center">
+                <h2 class="text-xl thick-underline">13. osztály</h2>
+                <a href="pdf/13/fejlesztes.pdf" target="_blank" class="subject-btn">Programfejlesztés</a>
+                <a href="pdf/13/robottecchnika.pdf" target="_blank" class="subject-btn">Robottechnika CAD/CAM</a>
+                <a href="pdf/13/iot.pdf" target="_blank" class="subject-btn">IoT</a>
+                <a href="pdf/13/cv.pdf" target="_blank" class="subject-btn">Munkavállalói angol</a>
+            </div>
+
+            <!-- Galéria és Bemutatkozás -->
+            <div class="flex flex-col">
+                <h2 class="text-xl thick-underline self-center lg:self-start">Szenczi Dávid Gábor</h2>
+                
+                <!-- Logó / Galéria indító -->
+                <div onclick="openGallery()" class="glass-panel logo-container w-full h-64 flex items-center justify-center mb-10 cursor-pointer group">
+                    <img src="logo.png" alt="Bánki Logó" class="w-full h-full object-contain p-6 transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <span class="absolute bottom-4 text-[10px] text-orange-400 opacity-0 group-hover:opacity-100 transition-all tracking-widest uppercase font-bold">Kattints a galériához</span>
+                </div>
+
+                <h2 class="text-xl thick-underline self-center lg:self-start">Bemutatkozás</h2>
+                
+                <div class="glass-panel p-6 text-sm leading-relaxed text-gray-300 border-l-4 border-orange-500">
+                    <p class="mb-4">
+                        A <span class="text-blue-400 font-bold uppercase tracking-wide">Dunaújvárosi Egyetem Bánki Donát Technikum</span> képzései a legmodernebb szakmai tudást biztosítják hallgatóik számára.
+                    </p>
+                    <p class="italic text-orange-400 font-semibold text-lg py-2">
+                        "Mi vagyunk a Te jövőd!"
+                    </p>
+                    <p class="mt-2 opacity-60">
+                        Ez a felület azért jött létre, hogy az oktatási anyagok és tantárgyi követelmények könnyen elérhetőek legyenek mindenki számára. Kattints a tantárgyakra a PDF fájlok megtekintéséhez.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Galéria Felugró Ablak (Modal) -->
+    <div id="galleryModal" onclick="closeGallery()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeGallery()">&times;</span>
+            <div class="bg-black/40 rounded-3xl p-2 border border-white/10 shadow-2xl">
+                <!-- Itt jelenik meg a kiválasztott kép, alapértelmezetten a logo.jpg -->
+                <img id="modalImg" src="logo.jpg" class="w-full rounded-2xl max-h-[75vh] object-contain mx-auto transition-opacity duration-300">
+            </div>
+            
+            <div class="flex justify-center gap-10 mt-8">
+                <button onclick="changeImg(-1)" class="bg-white/10 hover:bg-blue-600/50 px-8 py-3 rounded-full transition-all border border-white/10 font-bold">❮ Előző</button>
+                <button onclick="changeImg(1)" class="bg-white/10 hover:bg-blue-600/50 px-8 py-3 rounded-full transition-all border border-white/10 font-bold">Következő ❯</button>
+            </div>
+            <p id="imgCounter" class="text-center mt-4 text-gray-400 tracking-widest">Kép 1 / 3</p>
+        </div>
+    </div>
+
+    <script>
+        // A galéria elemei, az első kép a Bánki logó
+        const galleryItems = [
+            "logo.jpg", 
+            "https://picsum.photos/1200/800?random=1", 
+            "https://picsum.photos/1200/800?random=2"
+        ];
+        let currentIdx = 0;
+
+        function openGallery() {
+            // Megnyitáskor visszaállítjuk az indexet 0-ra, hogy a logó legyen az első
+            currentIdx = 0;
+            document.getElementById('galleryModal').classList.add('active');
+            updateDisplay();
+        }
+
+        function closeGallery() {
+            document.getElementById('galleryModal').classList.remove('active');
+        }
+
+        function changeImg(dir) {
+            currentIdx = (currentIdx + dir + galleryItems.length) % galleryItems.length;
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            const img = document.getElementById('modalImg');
+            img.style.opacity = '0.3';
+            setTimeout(() => {
+                img.src = galleryItems[currentIdx];
+                img.style.opacity = '1';
+                document.getElementById('imgCounter').innerText = `Kép ${currentIdx + 1} / ${galleryItems.length}`;
+            }, 100);
+        }
+
+        // Billentyűzet kezelés (nyilak és ESC)
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('galleryModal').classList.contains('active')) return;
+            if (e.key === 'ArrowLeft') changeImg(-1);
+            if (e.key === 'ArrowRight') changeImg(1);
+            if (e.key === 'Escape') closeGallery();
+        });
+    </script>
+</body>
+</html>
